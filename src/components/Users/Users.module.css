@@ -1,0 +1,18 @@
+.userPhoto {
+    height: 100px;
+    width:100px;
+}
+.page {
+    font-size: 18px;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 2px;
+}
+.SelectedPage {
+    font-weight: bold;
+    
+}
+
+.paginationBlock {
+    padding-bottom: 20px;
+}

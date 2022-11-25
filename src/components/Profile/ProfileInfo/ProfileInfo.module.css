@@ -1,0 +1,22 @@
+.descriptionBlock {
+padding: 10px;
+}
+.profileList {
+    list-style-type: none;
+   
+}
+.profileList ul {
+     margin: 0;
+    padding: 0;
+}
+.userImg{
+max-width: 300px;
+max-height: 300px;
+}
+.inputContainer p{
+    margin: 0;
+    margin-bottom: 0.25rem;
+    margin-left: 0.25rem;
+    color:gold;
+    font-size:1rem;
+}

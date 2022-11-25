@@ -1,0 +1,28 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+   
+    
+}
+
+.inputContainer {
+
+ text-align: left;
+}
+input {
+    margin-top: 0.5rem;
+}
+
+
+
+.inputContainer p{
+    margin: 0;
+    margin-bottom: 0.25rem;
+    margin-left: 0.25rem;
+    color:red;
+    font-size:1rem;
+}
+
+button {
+    width: 11rem;
+}

@@ -1,0 +1,23 @@
+.friends {
+    padding: 0 10px;
+    color: white;
+}
+
+.friendsItems {
+display: flex;
+
+}
+.friendsImage {
+   display: block;
+   min-width: 50px;
+    min-height: 50px;
+    padding: 10px;
+}
+.friendsImg {
+    width: 100%;
+    border-radius: 50%;
+}
+.descriptionBlock {
+    text-align: center;
+    
+}

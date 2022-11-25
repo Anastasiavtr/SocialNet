@@ -1,0 +1,21 @@
+.content {
+    grid-area: content;
+    background-color: cornflowerblue;
+  }
+
+  .form {
+    padding: 10px;
+  }
+
+  .postsItems {
+    margin-top: 10px;
+  }
+
+  h3 {
+    padding: 10px;
+  }
+  
+ .error {
+  font-weight: bold;
+  color:gold;
+}

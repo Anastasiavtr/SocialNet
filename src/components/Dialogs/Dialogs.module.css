@@ -1,0 +1,49 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.dialog {
+ color:white;   
+}
+.dialogsItems {
+    padding: 10px 20px;
+    list-style-type: none;
+}
+
+.dialogsItems .active {
+    color:gold;
+}
+.dialog {
+    padding: 10px;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+
+   width: 80%;
+}
+
+.AvatarImg {
+    max-width: 100px;
+    max-height: 100px;
+}
+.messageItems {
+    display: flex;
+justify-content: space-between;
+margin-bottom: 20px;
+background-color: rgba(0, 0, 0, 0.2)
+}
+.messageImage img {
+    max-width: 80px;
+    max-height: 80px;
+}
+.messageItems:nth-child(odd) {
+   flex-direction: row-reverse;
+    
+}
+
+.error {
+    font-weight: bold;
+    color:gold;
+}
