@@ -14,8 +14,8 @@ type PropsType = {
     onPageChanged: (page:number) => void
     users: Array<UserType>
     followingInProgress: Array<number>
-    follow: () => void
-    unfollow: () => void
+    isFetching: boolean
+    user: UserType
 }
 
 
@@ -26,7 +26,7 @@ const pageSize = useAppSelector(state => state.usersPage.pageSize)
 const totalUsersCount = useAppSelector(state => state.usersPage.totalUsersCount)
 const currentPage = useAppSelector(state => state.usersPage.currentPage)
 const isFetching = useAppSelector(state => state.usersPage.isFetching) 
-const followingInProgress= useAppSelector(state =>  state.usersPage.followingInProgress )
+const followingInProgress = useAppSelector(state =>  state.usersPage.followingInProgress )
    
 
 const dispatch = useAppDispatch()
@@ -59,8 +59,8 @@ useEffect(() => {
        <Pagination count={pagesCount} variant="outlined"size="small" shape="rounded" 
                        onChange={(e, page) => {onPageChanged(page)}} />
                         
-        {users.map(u =>
-         <User u={u} key={u.id} followingInProgress={followingInProgress}
+        {users.map(user =>
+         <User user={user} key={user.id} followingInProgress={followingInProgress}
          follow={followUser} unfollow={unfollowUser} /> )} 
     </section>
          

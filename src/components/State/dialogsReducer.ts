@@ -1,10 +1,10 @@
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
 }
-type MessageType = {
+export type MessageType = {
     id: number
     message:string
 }
@@ -22,6 +22,9 @@ let initialState = {
     ] as Array<MessageType>,
 }
 export type InitialStateType = typeof initialState
+
+
+
 const dialogsReducer = (state = initialState, action: any): InitialStateType => {
 
    

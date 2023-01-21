@@ -1,16 +1,10 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import appReducer from './appReducer'
 import authReducer from './authReducer'
 import dialogsReducer from './dialogsReducer'
 import profileReducer from './profileReducer'
 import sidebarReducer from './sidebarReducer'
 import usersReducer from './usersReducer'
-
-// const middleware = getDefaultMiddleware({
-//         immutableCheck: false,
-//         serializableCheck: false,
-//         thunk: true,
-//       });
 
 const store = configureStore( {
      reducer: {
