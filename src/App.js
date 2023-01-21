@@ -3,12 +3,13 @@ import React from 'react';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import {HashRouter} from 'react-router-dom';
 
 import News from './components/News/News'
 import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import UsersContainer from './components/Users/UsersContainer';
+import Users from './components/Users/Users';
 import Login from './login/login';
 import { useEffect } from 'react';
 import { initializeApp } from './components/State/appReducer';
@@ -46,7 +47,7 @@ const App = (props) => {
     <Route path='/profile/' element={<ProfileContainer/>}/>
     <Route path='/dialogs/*' element={<DialogsContainer/> }/>
     <Route path='/login/' element={<Login />}/>
-    <Route path='/users' element={<UsersContainer />} />
+    <Route path='/users' element={<Users />} />
     <Route path='/news' element={<News/>}/>
     <Route path='/music' element={<Music/>}/>
     <Route path='/settings' element={<Settings/>}/>
@@ -69,11 +70,11 @@ const mapStateToProps = (state) => {
 let AppContainer = connect(mapStateToProps,{initializeApp} )(App);
 
 const MainApp = () => {
-  return <BrowserRouter>
+  return  <HashRouter>
   <Provider store={store}>
     <AppContainer />
 </Provider>
-  </BrowserRouter> 
+  </HashRouter>
 }
 
 export default MainApp 
