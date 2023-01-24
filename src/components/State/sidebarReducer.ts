@@ -2,7 +2,7 @@ export type InitialStateType = {
     friends: Array<FriendsType>
 }
 
-type FriendsType = {
+export type FriendsType = {
 id: number
 name: string
 }

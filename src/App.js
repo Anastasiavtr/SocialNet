@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import ProfileContainer from './components/Profile/ProfileContainer';
+import Profile from './components/Profile/Profile';
 import {HashRouter} from 'react-router-dom';
 
 import News from './components/News/News'
@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import { initializeApp } from './components/State/appReducer';
 import Preloader from './components/Preloader/Preloader';
 import { connect } from 'react-redux';
-import FriendsContainer from './components/Navbar/Friends/FriendsContainer';
+import Friends from './components/Navbar/Friends/Friends';
 import { Provider } from 'react-redux';
 import store from './components/State/reduxStore'
 import { Suspense } from 'react';
@@ -44,15 +44,15 @@ const App = (props) => {
     <Suspense fallback={<Preloader/>}>
     <Routes> 
     <Route path="/" element={<Navigate to="/profile" />} />
-    <Route path='/profile/:userId' element={<ProfileContainer/>}/> 
-    <Route path='/profile/' element={<ProfileContainer/>}/>
+    <Route path='/profile/:userId' element={<Profile/>}/> 
+    <Route path='/profile/' element={<Profile/>}/>
     <Route path='/dialogs/*' element={<Dialogs/> }/>
     <Route path='/login/' element={<Login />}/>
     <Route path='/users' element={<Users />} />
     <Route path='/news' element={<News/>}/>
     <Route path='/music' element={<Music/>}/>
     <Route path='/settings' element={<Settings/>}/>
-    <Route path='/profile/:userId' element={<FriendsContainer/>}/>
+    <Route path='/profile/:userId' element={<Friends/>}/>
     <Route path='*' element={<NotFound />} />
     </Routes>
     </Suspense>

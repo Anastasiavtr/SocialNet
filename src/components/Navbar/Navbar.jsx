@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import s from './Navbar.module.css'
-import FriendsContainer from './Friends/FriendsContainer';
+import FriendsContainer from './Friends/Friends';
 
 
 const activeLink = link =>  link.isActive ? s.active : s.item;
