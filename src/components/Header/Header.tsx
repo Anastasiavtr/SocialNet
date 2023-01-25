@@ -16,7 +16,7 @@ const Header:React.FC<PropsType> = (props) => {
  const isAuth = useAppSelector(state => state.auth.isAuth) 
  const loginName = useAppSelector(state =>state.auth.login)
  const dispatch = useAppDispatch()
- const logout = () => {dispatch(logout())}
+ const logOut = () => {dispatch(logout())}
            
  
             return(
@@ -24,7 +24,7 @@ const Header:React.FC<PropsType> = (props) => {
                    <img src='https://flyclipart.com/thumb2/image-741067.png'/>
                     <div className={s.loginBlock}>
                         {isAuth 
-                        ? <div>{loginName} <button onClick={logout}>Log out</button></div>
+                        ? <div>{loginName} <button onClick={logOut}>Log out</button></div>
                        : <NavLink to='/login/'>Login</NavLink>}               
                        </div>          
               </header>

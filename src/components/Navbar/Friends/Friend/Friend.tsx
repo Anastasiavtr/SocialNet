@@ -1,7 +1,11 @@
 import s from './../Friends.module.css'
 import { NavLink } from 'react-router-dom'
 
-const Friend = ({id, name}) => {
+type PropsType = {
+    id: number
+    name:string
+}
+const Friend:React.FC<PropsType> = ({id, name}) => {
    
     return  (
    <div>

@@ -22,16 +22,21 @@ import { Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
 import NotFound from './components/NofFound/NotFound';
 import Dialogs from './components/Dialogs/Dialogs';
+import { useAppDispatch, useAppSelector } from './Types/hooks';
 
 // const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs.jsx'));
 
 const App = (props) => {
+  
+const initialized = useAppSelector(state => state.app.initialized  )
+const dispatch = useAppDispatch()
+const initializeAllApp = () => {dispatch(initializeApp())}
 
   useEffect(( ) => {
-    props.initializeApp();
+    initializeAllApp();
   }, [] )
 
- if (!props.initialized) {
+ if (!initialized) {
   return <Preloader />
 
 }
@@ -62,18 +67,10 @@ const App = (props) => {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    initialized: state.app.initialized  
-  }
-
-}
-let AppContainer = connect(mapStateToProps,{initializeApp} )(App);
-
 const MainApp = () => {
   return  <HashRouter>
   <Provider store={store}>
-    <AppContainer />
+    <App />
 </Provider>
   </HashRouter>
 }

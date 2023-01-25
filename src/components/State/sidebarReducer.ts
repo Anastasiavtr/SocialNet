@@ -11,7 +11,7 @@ let initialState: InitialStateType = {
     friends: [
          {id: 2,  name: 'Dima' },  
          {id: 3, name: 'Alexander' }, 
-         {id: 4, name: 'marina'}
+         {id: 4, name: 'Marina'}
     ]
 }
 
