@@ -1,12 +1,14 @@
-import { ThunkAction } from "@reduxjs/toolkit"
-import { Action } from "redux"
-import { authAPI, ResultCodeForCaptchaEnum } from "../../api/api"
-import { securityAPI } from "../../api/api"
-import { RootState } from "./reduxStore"
-const SET_USER_DATA = "network/auth/SET-USER-DATA"
-const DELETE_AUTH_USER = "network/auth/DELETE-AUTH-USER"
-const GET_CAPTCHA_URL_SUCCESS = "network/auth/GET-CAPTCHA-URL-SUCCESS"
-import { ResultCodesEnum } from "../../api/api"
+import { ThunkAction } from '@reduxjs/toolkit'
+import { Action } from 'redux'
+import { ResultCodeForCaptchaEnum } from '../../api/api'
+import { BaseThunkType, InferActionsTypes, RootState } from './reduxStore'
+import { ResultCodesEnum } from '../../api/api'
+import { authAPI } from '../../api/authApi'
+import { securityAPI } from '../../api/securityApi'
+
+const SET_USER_DATA = 'network/auth/SET-USER-DATA' as const
+const DELETE_AUTH_USER = 'network/auth/DELETE-AUTH-USER' as const
+const GET_CAPTCHA_URL_SUCCESS = 'network/auth/GET-CAPTCHA-URL-SUCCESS' as const
 
 export type InitialStateType = {
   login: string | null
@@ -55,57 +57,31 @@ const authReducer = (
   }
 }
 
-type setUserPayloadType = {
-  login: string
-  userId: number
-  email: string
+type ActionsType = InferActionsTypes<typeof actions>
+
+export const actions = {
+  setUser: (login: string, userId: number, email: string) => ({
+    type: SET_USER_DATA,
+    payload: { login, userId, email },
+  }),
+
+  deleteAuthUser: () => ({
+    type: DELETE_AUTH_USER,
+  }),
+
+  getCaptchaUrlSuccess: (captchaUrl: string | null) => ({
+    type: GET_CAPTCHA_URL_SUCCESS,
+    payload: { captchaUrl },
+  }),
 }
 
-type SetUserActionType = {
-  type: typeof SET_USER_DATA
-  payload: setUserPayloadType
-}
+type ThunkType = BaseThunkType<ActionsType>
 
-type ActionsType =
-  | SetUserActionType
-  | DeleteAuthUserActionType
-  | GetCaptchaUrlSuccessActionType
-
-export const setUser = (
-  login: string,
-  userId: number,
-  email: string
-): SetUserActionType => ({
-  type: SET_USER_DATA,
-  payload: { login, userId, email },
-})
-
-type DeleteAuthUserActionType = {
-  type: typeof DELETE_AUTH_USER
-}
-export const deleteAuthUser = (): DeleteAuthUserActionType => ({
-  type: DELETE_AUTH_USER,
-})
-
-type GetCaptchaUrlSuccessActionType = {
-  type: typeof GET_CAPTCHA_URL_SUCCESS
-  payload: { captchaUrl: string | null }
-}
-
-export const getCaptchaUrlSuccess = (
-  captchaUrl: string | null
-): GetCaptchaUrlSuccessActionType => ({
-  type: GET_CAPTCHA_URL_SUCCESS,
-  payload: { captchaUrl },
-})
-
-type ThunksType = ThunkAction<Promise<void>, RootState, unknown, ActionsType>
-
-export const getAuthUserData = (): ThunksType => async (dispatch) => {
+export const getAuthUserData = (): ThunkType => async (dispatch) => {
   let authData = await authAPI.me()
   if (authData.resultCode === ResultCodesEnum.Success) {
     let { login, id, email } = authData.data
-    dispatch(setUser(login, id, email))
+    dispatch(actions.setUser(login, id, email))
   }
 }
 
@@ -116,14 +92,14 @@ export const login = (
   captcha: any,
   setStatus: any,
   setSubmitting: any
-): ThunksType => {
+): ThunkType => {
   return async (dispatch) => {
     let loginData = await authAPI.login(email, password, rememberMe, captcha)
 
     if (loginData.resultCode === ResultCodesEnum.Success) {
       // success, get auth data
       dispatch(getAuthUserData())
-      dispatch(getCaptchaUrlSuccess(null))
+      dispatch(actions.getCaptchaUrlSuccess(null))
     } else {
       if (loginData.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
         dispatch(getCaptchaUrl())
@@ -134,16 +110,16 @@ export const login = (
   }
 }
 
-export const getCaptchaUrl = (): ThunksType => async (dispatch) => {
-  const response = await securityAPI.getCaptchaUrl()
-  const captchaUrl = response.data.url
-  dispatch(getCaptchaUrlSuccess(captchaUrl))
+export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
+  const data = await securityAPI.getCaptchaUrl()
+  const captchaUrl = data.url
+  dispatch(actions.getCaptchaUrlSuccess(captchaUrl))
 }
 
-export const logout = (): ThunksType => async (dispatch) => {
+export const logout = (): ThunkType => async (dispatch) => {
   let response = await authAPI.logout()
   if (response.data.resultCode === ResultCodesEnum.Success) {
-    dispatch(deleteAuthUser())
+    dispatch(actions.deleteAuthUser())
   }
 }
 
