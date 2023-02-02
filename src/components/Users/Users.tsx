@@ -12,6 +12,7 @@ import { UserType } from '../../Types/types'
 import { useAppSelector, useAppDispatch } from '../../Types/hooks'
 import User from './User'
 import UsersSearchForm from './UsersSearchForm'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 type PropsType = {
   // totalUsersCount: number
@@ -23,6 +24,7 @@ type PropsType = {
   // isFetching: boolean
   user: UserType
 }
+type QueryParamsType = { term: string; page: string; friend: string }
 
 const Users: React.FC<PropsType> = React.memo((props) => {
   const users = useAppSelector((state) => state.usersPage.users)
@@ -51,10 +53,48 @@ const Users: React.FC<PropsType> = React.memo((props) => {
   // const toggleFollowing = (isFetching: boolean, userId: number) => {
   //   dispatch(toggleFollowingProgress(isFetching, userId))
   // }
+  // useEffect(() => {
+  //   useNavigate({
+  //     pathname:'/users',
+  //     search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
+  //   })
+  // }[filter, currentPage])
+
+  const location = useLocation()
+  const [search, setSearch] = useSearchParams(location.search)
 
   useEffect(() => {
-    getUsers(currentPage, pageSize, filter)
+    const parsed = Object.fromEntries([...search]) as QueryParamsType
+
+    let actualPage = currentPage
+    let actualFilter = filter
+
+    if (!!parsed.page) actualPage = Number(parsed.page)
+
+    if (!!parsed.term) actualFilter = { ...actualFilter, term: parsed.term }
+
+    if (parsed.friend !== null) actualFilter = { ...actualFilter, friend: '' }
+
+    getUsers(actualPage, pageSize, actualFilter)
   }, [])
+
+  let navigate = useNavigate()
+  useEffect(() => {
+    const query: QueryParamsType = {
+      term: '',
+      page: '',
+      friend: '',
+    }
+
+    if (!!filter.term) query.term = filter.term
+    if (currentPage !== 1) query.page = String(currentPage)
+    if (filter.friend !== null) query.friend = String(filter.friend)
+
+    const queryToString = new URLSearchParams(query)
+
+    navigate('/users')
+    setSearch(queryToString.toString())
+  }, [filter, currentPage])
 
   const onPageChanged = (pageNumber: number) => {
     getUsers(pageNumber, pageSize, filter)

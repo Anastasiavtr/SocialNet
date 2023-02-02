@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from 'formik'
 import React from 'react'
+import { useAppSelector } from '../../Types/hooks'
 import { FilterType } from '../State/usersReducer'
 
 type MyFormValues = {
@@ -7,10 +8,12 @@ type MyFormValues = {
   getUsers: (page: number, pageSize: number, filter: FilterType) => void
 }
 const UsersSearchForm: React.FC<MyFormValues> = React.memo((props) => {
+  const filter = useAppSelector((state) => state.usersPage.filter)
   return (
     <div>
       <Formik
-        initialValues={{ term: '', friend: '' }}
+        enableReinitialize
+        initialValues={{ term: filter.term, friend: filter.friend }}
         onSubmit={(values) => {
           props.onFilterChanged(values)
         }}
