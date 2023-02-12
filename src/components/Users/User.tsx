@@ -1,7 +1,7 @@
-import s from "./Users.module.css"
-import userPhoto from "../../assets/images/user.png"
-import { NavLink } from "react-router-dom"
-import { UserType } from "../../Types/types"
+import styles from './Users.module.css'
+import userPhoto from '../../assets/images/user.png'
+import { NavLink } from 'react-router-dom'
+import { UserType } from '../../Types/types'
 
 type PropsType = {
   user: UserType
@@ -17,17 +17,17 @@ const User: React.FC<PropsType> = ({
   unfollow,
 }) => {
   return (
-    <div>
-      <div>
-        <NavLink to={"/profile/" + user.id}>
+    <div className={styles.wrapper}>
+      <div className={styles.usersItem}>
+        <NavLink to={'/profile/' + user.id}>
           <img
-            className={s.userPhoto}
+            className={styles.userPhoto}
             src={user.photos.small != null ? user.photos.small : userPhoto}
           />
         </NavLink>
       </div>
       {user.followed ? (
-        <div>
+        <div className={styles.usersItem}>
           <button
             disabled={followingInProgress.includes(user.id)}
             onClick={() => {
@@ -38,8 +38,8 @@ const User: React.FC<PropsType> = ({
           </button>
         </div>
       ) : (
-        <div>
-          {" "}
+        <div className={styles.item}>
+          {' '}
           <button
             disabled={followingInProgress.includes(user.id)}
             onClick={() => {
@@ -51,7 +51,7 @@ const User: React.FC<PropsType> = ({
         </div>
       )}
 
-      <div>
+      <div className={styles.item}>
         <div>{user.name}</div>
         <div>{user.status}</div>
       </div>

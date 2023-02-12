@@ -1,17 +1,67 @@
 .header {
-    grid-area: header;
-    background-color: rgb(130, 178, 255);
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: rgb(4, 22, 37,0.4);
+  width: 100%;
+  padding: 20px 0;
+  color:white; 
+  font-size: 26px;  
     }
     
-    .header img {
-  width: 70px;   
-
+.container {
+   display: flex;
+  justify-content: space-between;    
+  align-items: center;
+  margin: 0 auto;
+  max-width:1640px;
+  padding: 0 20px;
     }
 
-    .loginBlock {
-      float:right;
-      padding-top: 10px;
+
+.loginBlock {
+      display: flex;
+      gap: 20px;
+  justify-content: space-between;    
+  align-items: center;
     }
-    .login a {
-      color:white;
+    .logoutButton button {
+     border: 1px solid white;
+    }
+.loginButton a {
+  text-decoration: none;
+  color:white;
+}
+.loginButton a:hover {
+  color: rgba(111, 183, 238, 0.795);
+}
+    .button {
+padding: 10px 30px;
+background-color: transparent;
+color:white;
+font-size: 26px;  
+border: 1px solid rgba(111, 183, 238, 0.795);
+-webkit-box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 0.26);
+-moz-box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 0.26);
+box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 0.26);
+    }
+    .button:hover {
+      color:rgba(111, 183, 238, 0.795);
+      -webkit-box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 50.26);
+-moz-box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 50.26);
+box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 50.26);
+    }
+   
+    @media (max-width: 1200px) {
+      .loginBlock span {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header svg {
+        font-size: 24px;
+      }
     }

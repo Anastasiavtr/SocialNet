@@ -1,11 +1,13 @@
 import Preloader from '../../Preloader/Preloader'
-import s from './ProfileInfo.module.css'
+import styles from './ProfileInfo.module.css'
 import user from './../../../assets/images/user.png'
 import ProfileStatus from './ProfileStatus'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 import ProfileDataForm from './ProfileDataForm'
 import { useEffect } from 'react'
 import { ProfileType, ContactsType } from '../../../Types/types'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import React from 'react'
 
 type PropsType = {
   isEdit: boolean
@@ -18,7 +20,7 @@ type PropsType = {
   saveProfile: (profile: ProfileType, setStatus: any) => void
 }
 
-const ProfileInfo: React.FC<PropsType> = (props) => {
+const ProfileInfo: React.FC<PropsType> = React.memo((props) => {
   useEffect(() => {}, [props.isEdit])
 
   if (!props.profile) {
@@ -31,38 +33,41 @@ const ProfileInfo: React.FC<PropsType> = (props) => {
   }
 
   return (
-    <section>
-      <div>
-        <img src="https://www.newcastle.edu.au/__data/assets/image/0007/262933/b_information_technology_header.jpg" />
-      </div>
-      <img className={s.userImg} src={props.profile.photos.large || user} />
-      {props.isOwner && (
-        <div>
-          <input type={'file'} onChange={onMainPhotoSelected} />
-        </div>
-      )}
+    <section className={styles.container}>
+      <div className={styles.wrapper}>
+        <img
+          className={styles.userImg}
+          src={props.profile.photos.large || user}
+        />
+        {props.isOwner && (
+          <div className={styles.input}>
+            <input type={'file'} onChange={onMainPhotoSelected} />
+          </div>
+        )}
 
-      {props.isEdit ? (
-        <ProfileDataForm
-          profile={props.profile}
-          editMode={props.editMode}
-          saveProfile={props.saveProfile}
+        {props.isEdit ? (
+          <ProfileDataForm
+            profile={props.profile}
+            editMode={props.editMode}
+            saveProfile={props.saveProfile}
+          />
+        ) : (
+          <ProfileData
+            editMode={props.editMode}
+            saveProfile={props.saveProfile}
+            profile={props.profile}
+            isOwner={props.isOwner}
+          />
+        )}
+        <ProfileStatus
+          status={props.status}
+          updateUserStatus={props.updateUserStatus}
         />
-      ) : (
-        <ProfileData
-          editMode={props.editMode}
-          saveProfile={props.saveProfile}
-          profile={props.profile}
-          isOwner={props.isOwner}
-        />
-      )}
-      <ProfileStatus
-        status={props.status}
-        updateUserStatus={props.updateUserStatus}
-      />
+      </div>
     </section>
   )
-}
+})
+
 type PropsProfileDataType = {
   isOwner: boolean
   editMode: (mode: boolean) => void
@@ -71,11 +76,11 @@ type PropsProfileDataType = {
   saveProfile: (profile: ProfileType, setStatus: any) => void
 }
 
-const ProfileData: React.FC<PropsProfileDataType> = (props) => {
+const ProfileData: React.FC<PropsProfileDataType> = React.memo((props) => {
   return (
-    <div className={s.descriptionBlock}>
+    <div className={styles.descriptionBlock}>
       {props.isOwner && (
-        <div>
+        <div className={styles.button}>
           <button
             onClick={() => {
               props.editMode(true)
@@ -86,25 +91,30 @@ const ProfileData: React.FC<PropsProfileDataType> = (props) => {
         </div>
       )}
 
-      <div>
-        <b>Full name</b>: {props.profile.fullName}
-      </div>
-      <div>
-        <b>Looking for a job</b>: {props.profile.lookingForAJob ? 'yes' : 'no'}
-      </div>
-      {props.profile.lookingForAJob && (
-        <div>
-          <b>My professional skills</b>:{' '}
-          {props.profile.lookingForAJobDescription}
+      <div className={styles.descriptionItems}>
+        <div className={styles.items}>
+          <AutoAwesomeIcon /> <b>Full name:</b> {props.profile.fullName}
         </div>
-      )}
+        <div className={styles.items}>
+          <AutoAwesomeIcon /> <b>Looking for a job:</b>{' '}
+          {props.profile.lookingForAJob ? 'yes' : 'no'}
+        </div>
+        {props.profile.lookingForAJob && (
+          <div className={styles.items}>
+            <AutoAwesomeIcon />
+            <b>My professional skills:</b>{' '}
+            {props.profile.lookingForAJobDescription}
+          </div>
+        )}
 
-      <div>
-        <b>About me</b>: {props.profile.aboutMe}
+        <div className={styles.items}>
+          <AutoAwesomeIcon />
+          <b>About me:</b> {props.profile.aboutMe}
+        </div>
       </div>
 
-      <li className={s.profileList}>
-        <b>Contacts</b>:
+      <li className={styles.profileList}>
+        <b>Contacts:</b>
         {Object.keys(props.profile.contacts).map((key) => {
           return (
             <Contact
@@ -112,13 +122,12 @@ const ProfileData: React.FC<PropsProfileDataType> = (props) => {
               contactTitle={key}
               contactValue={props.profile.contacts[key as keyof ContactsType]}
             />
-          ) //[key]
+          )
         })}
       </li>
     </div>
   )
-}
-
+})
 type PropsContactType = {
   contactTitle: string
   contactValue: string

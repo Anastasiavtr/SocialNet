@@ -1,4 +1,4 @@
-import s from './../Dialogs.module.css'
+import styles from './../Dialogs.module.css'
 import { NavLink } from 'react-router-dom'
 
 type PropsType = {
@@ -9,10 +9,10 @@ const DialogItem: React.FC<PropsType> = (props) => {
   let path = '/profile/' + props.id
   return (
     <div>
-      <NavLink to={path} className={s.dialog}>
+      <NavLink to={path} className={styles.dialog}>
         <div>
           <img
-            className={s.AvatarImg}
+            className={styles.AvatarImg}
             src="https://png.pngtree.com/png-clipart/20190630/original/pngtree-vector-avatar-icon-png-image_4162757.jpg"
           />
         </div>

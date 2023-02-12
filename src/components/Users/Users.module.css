@@ -1,8 +1,29 @@
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap:10px;
+    padding-bottom: 30px;
+}
+.usersItem {
+   width: 300px;
+   display: flex;
+   justify-content: center;
+}
 .userPhoto {
     height: 100%;
     width: 100%;
-    max-height: 300px;
-    max-width: 300px;
+    object-fit: cover;
+
+}
+.usersItem button:hover,
+.usersItem a:hover {
+  
+    -webkit-box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 50.26);
+-moz-box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 50.26);
+box-shadow: 0px 0px 71px 0px rgba(60, 105, 139, 50.26);
 }
 .page {
     font-size: 18px;
@@ -18,3 +39,25 @@
 .paginationBlock {
     padding-bottom: 20px;
 }
+
+
+@media (max-width: 1200px) {
+    .usersItem {
+      width: 200px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .container{
+     margin-left: 20px;
+    }
+  }
+  @media (max-width: 600px) {
+    .usersItem {
+        width: 100px;
+      }
+
+
+  }
+
+ 

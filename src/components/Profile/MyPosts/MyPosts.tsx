@@ -1,9 +1,8 @@
 import React, { FC } from 'react'
 import { actions } from '../../State/profileReducer'
-import { connect } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '../../../Types/hooks'
-import { PostType, ProfileType } from '../../../Types/types'
-import s from './MyPosts.module.css'
+import { PostType } from '../../../Types/types'
+import styles from './MyPosts.module.css'
 import Post from './Post/Post'
 import { Formik, Field, Form } from 'formik'
 import { PostsSchema } from '../../../Validators/ValidationDialogs'
@@ -12,7 +11,7 @@ type PropsType = {
   posts: Array<PostType>
 }
 
-const MyPosts: FC<PropsType> = (props) => {
+const MyPosts: FC<PropsType> = React.memo((props) => {
   const posts = useAppSelector((state) => state.profilePage.posts)
   const dispatch = useAppDispatch()
   const addNewPost = (newPostText: string) => {
@@ -22,10 +21,10 @@ const MyPosts: FC<PropsType> = (props) => {
     dispatch(actions.deletePost(id))
   }
   return (
-    <section>
+    <section className={styles.container}>
       <h3> My posts</h3>
       <NewPost addPost={addNewPost} />
-      <div className={s.postsItems}>
+      <div className={styles.postsItems}>
         {posts.map((post) => {
           return (
             <Post
@@ -39,9 +38,8 @@ const MyPosts: FC<PropsType> = (props) => {
       </div>
     </section>
   )
-}
-
-export default React.memo(MyPosts)
+})
+export default MyPosts
 
 type MyFormValues = {
   addPost: (newPostText: string) => void
@@ -62,8 +60,8 @@ const NewPost: React.FC<MyFormValues> = (props) => {
       validationSchema={PostsSchema}
     >
       {({ errors, touched, dirty, handleBlur, handleChange }) => (
-        <Form className={s.form}>
-          <div>
+        <Form className={styles.form}>
+          <div className={styles.field}>
             <Field
               as={'textarea'}
               name={'newPostText'}
@@ -72,7 +70,7 @@ const NewPost: React.FC<MyFormValues> = (props) => {
               onChange={handleChange}
             />
             {errors.newPostText && touched.newPostText ? (
-              <div className={s.error}>{errors.newPostText}</div>
+              <div className={styles.error}>{errors.newPostText}</div>
             ) : null}
           </div>
           <div>
@@ -85,28 +83,3 @@ const NewPost: React.FC<MyFormValues> = (props) => {
     </Formik>
   )
 }
-
-// class MyPostsContainer extends React.Component {
-
-// render() {
-//      return <MyPosts addPost={this.props.addPost}
-//     posts={this.props.profile.posts}
-//      />
-// }
-// }
-
-//     let mapStateToProps = (state) => {
-//     return {
-//     profile: state.profilePage
-// }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addPost: (newPostText) => {
-//             dispatch(addPost(newPostText))
-//         }
-//     }
-// }
-
-// export default connect(mapStateToProps, {addPost})(MyPostsContainer)

@@ -1,22 +1,88 @@
-.descriptionBlock {
-padding: 10px;
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
 }
-.profileList {
-    list-style-type: none;
+.container {
    
 }
+.items {
+    display: flex;
+    gap: 10px
+}
+.input input {
+      padding-left: 20px;
+    color:white;
+    font-size: 16px;
+}
+.descriptionBlock, .descriptionItems, .profileList{
+padding: 10px ;
+
+display: flex;
+flex-direction: column;
+gap: 10px;
+
+color:white;
+line-height: 1.4;
+font-weight: normal;
+letter-spacing: 0.2px;
+
+ list-style-type: none;
+}
+.button {
+  padding: 0 10px;  
+}
+.image {
+    display: flex;
+    flex-direction: column;
+}
+
 .profileList ul {
      margin: 0;
     padding: 0;
 }
-.userImg{
+
+.userImg {
 max-width: 300px;
 max-height: 300px;
 }
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 0;
+    
+    color:white;
+}
+.inputContainer input,
+.inputContainer textarea {
+    font-size: 20px;
+}
+
 .inputContainer p{
     margin: 0;
     margin-bottom: 0.25rem;
     margin-left: 0.25rem;
-    color:gold;
+    color:rgba(255, 0, 25, 0.733);
     font-size:1rem;
 }
+
+@media (max-width: 1200px) {
+    .userImg  {
+        padding-left: 20px;
+        max-width: 200px;
+        max-height: 200px;
+    }
+  }
+  @media (max-width: 600px) {
+    .wrapper {
+        align-items: center;
+
+      }
+
+      .input input {
+        padding-left: 0;
+      }
+  }
+

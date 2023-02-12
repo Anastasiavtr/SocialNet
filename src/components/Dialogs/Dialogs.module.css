@@ -1,26 +1,26 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+    display: flex;
+  padding-top:20px ;
+
 }
 .dialog {
+    display: block;
+    text-align: center;
  color:white;   
 }
 .dialogsItems {
-    padding: 10px 20px;
+   
+    padding-right: 50px;
     list-style-type: none;
 }
 
 .dialogsItems .active {
     color:gold;
 }
-.dialog {
-    padding: 10px;
-}
 
 .messages {
     display: flex;
     flex-direction: column;
-
    width: 80%;
 }
 
@@ -30,9 +30,12 @@
 }
 .messageItems {
     display: flex;
+    align-items: center;
 justify-content: space-between;
 margin-bottom: 20px;
-background-color: rgba(0, 0, 0, 0.2)
+padding: 10px;
+background-color: rgba(255, 255, 255, 0.285);
+border: 2px solid rgba(255, 255, 255, 0.285);
 }
 .messageImage img {
     max-width: 80px;
@@ -42,8 +45,45 @@ background-color: rgba(0, 0, 0, 0.2)
    flex-direction: row-reverse;
     
 }
-
+.form {
+    align-self: center;
+    width: 50%;
+}
+.formButton, .formArea {
+    width: 100%;
+}
 .error {
     font-weight: bold;
     color:gold;
+}
+
+@media (max-width: 1200px) {
+    .AvatarImg {
+        max-width: 70px;
+        max-height: 70px;
+    }
+    .messageImage img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+}
+
+@media (max-width: 800px) {
+    .dialogsItems {
+        display: none;
+    }
+    .dialogs{
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .messages {
+      
+       width: 100%;
+    }
+    .dialogs {
+       
+    padding-top: 0;
+    }
 }

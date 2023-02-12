@@ -22,11 +22,10 @@ type PropsType = {
   posts: Array<PostType>
 }
 
-const Profile: React.FC<PropsType> = (props) => {
+const Profile: React.FC<PropsType> = React.memo((props) => {
   const profile = useAppSelector((state) => state.profilePage.profile)
   const status = useAppSelector((state) => state.profilePage.status)
   const authUserId = useAppSelector((state) => state.auth.userId)
-  // const isAuth = useAppSelector((state) => state.auth.isAuth)
   const isEdit = useAppSelector((state) => state.profilePage.isEdit)
 
   const dispatch = useAppDispatch()
@@ -66,10 +65,6 @@ const Profile: React.FC<PropsType> = (props) => {
     getUStatus(userId as number)
   }, [params.userId])
 
-  //   if (!isAuth) {
-  //     return <Navigate to="/login/" />
-  //   }
-
   return (
     <main>
       <ProfileInfo
@@ -85,29 +80,5 @@ const Profile: React.FC<PropsType> = (props) => {
       <MyPosts posts={props.posts} />
     </main>
   )
-}
-
+})
 export default Profile
-
-// export default compose(
-//     connect(mapStateToProps,
-//          {getUserProfile, getUserStatus, updateUserStatus}),
-//    withRouter,
-// withAuthRedirect
-// )(ProfileContainer)
-//     const mapStateToProps = (state) => ({
-//     profile: state.profilePage.profile,
-//     status: state.profilePage.status,
-//     authUserId: state.auth.userId,
-//     isAuth: state.auth.isAuth
-// })
-
-//     const TakeParams = (props) => {
-//     return <ProfileContainer {...props} params={useParams()} />
-// }
-// let AuthRedirectComponent = withAuthRedirect(TakeParams)
-// export default connect(mapStateToProps, {getUserProfile})(AuthRedirectComponent)
-
-// const TakeParams = (props) => {
-//     return <ProfileContainer {...props} params={useParams()} />
-// }

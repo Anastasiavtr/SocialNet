@@ -1,10 +1,11 @@
-import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit"
-import appReducer from "./appReducer"
-import authReducer from "./authReducer"
-import dialogsReducer from "./dialogsReducer"
-import profileReducer from "./profileReducer"
-import sidebarReducer from "./sidebarReducer"
-import usersReducer from "./usersReducer"
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
+import appReducer from './appReducer'
+import authReducer from './authReducer'
+import chatReducer from './chatReducer'
+import dialogsReducer from './dialogsReducer'
+import profileReducer from './profileReducer'
+import sidebarReducer from './sidebarReducer'
+import usersReducer from './usersReducer'
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     usersPage: usersReducer,
     auth: authReducer,
     app: appReducer,
+    chat: chatReducer,
   },
 })
 export type RootState = ReturnType<typeof store.getState>

@@ -1,12 +1,12 @@
-import React, { useEffect } from "react"
-import { DialogType, MessageType, sendMessage } from "../State/dialogsReducer"
-import s from "./Dialogs.module.css"
-import Message from "./Message/Message"
-import DialogItem from "./DialogItem/DialogItem"
-import { Form, Field, Formik } from "formik"
-import { DialogsSchema } from "../../Validators/ValidationDialogs"
-import { useAppDispatch, useAppSelector } from "../../Types/hooks"
-import { Navigate } from "react-router-dom"
+import React from 'react'
+import { DialogType, MessageType, sendMessage } from '../State/dialogsReducer'
+import styles from './Dialogs.module.css'
+import Message from './Message/Message'
+import DialogItem from './DialogItem/DialogItem'
+import { Form, Field, Formik } from 'formik'
+import { DialogsSchema } from '../../Validators/ValidationDialogs'
+import { useAppDispatch, useAppSelector } from '../../Types/hooks'
+import { Navigate } from 'react-router-dom'
 
 type PropsType = {
   dialogs: Array<DialogType>
@@ -28,9 +28,9 @@ const Dialogs: React.FC<PropsType> = (props) => {
 
   return (
     <>
-      <section className={s.dialogs}>
-        <div className={s.dialogsItems}>
-          <div className={s.dialogsItems}>
+      <section className={styles.dialogs}>
+        <div className={styles.dialogsItems}>
+          <div>
             {dialogs.map((dialog) => {
               return (
                 <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} />
@@ -39,7 +39,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
           </div>
         </div>
 
-        <div className={s.messages}>
+        <div className={styles.messages}>
           {dialogsMessages.map((message) => {
             return <Message message={message.message} key={message.id} />
           })}
@@ -63,7 +63,7 @@ const AddMessageForm: React.FC<MyFormValues> = ({ sendMessage }) => {
   return (
     <Formik
       initialValues={{
-        newMessageBody: "",
+        newMessageBody: '',
       }}
       validationSchema={DialogsSchema}
       onSubmit={(values, { resetForm }) => {
@@ -72,21 +72,26 @@ const AddMessageForm: React.FC<MyFormValues> = ({ sendMessage }) => {
       }}
     >
       {({ errors, touched, dirty, handleBlur, handleChange }) => (
-        <Form>
+        <Form className={styles.form}>
           <div>
             <Field
-              as={"textarea"}
-              name={"newMessageBody"}
+              className={styles.formArea}
+              as={'textarea'}
+              name={'newMessageBody'}
               placeholder="Enter your message"
               onBlur={handleBlur}
               onChange={handleChange}
             />
             {errors.newMessageBody && touched.newMessageBody ? (
-              <div className={s.error}>{errors.newMessageBody}</div>
+              <div className={styles.error}>{errors.newMessageBody}</div>
             ) : null}
           </div>
           <div>
-            <button type={"submit"} disabled={!dirty}>
+            <button
+              className={styles.formButton}
+              type={'submit'}
+              disabled={!dirty}
+            >
               Add message
             </button>
           </div>
@@ -97,8 +102,3 @@ const AddMessageForm: React.FC<MyFormValues> = ({ sendMessage }) => {
 }
 
 export default Dialogs
-// export default compose(
-//     connect(mapStateToProps, {sendMessage}),
-//     withAuthRedirect
-// )
-// (Dialogs)

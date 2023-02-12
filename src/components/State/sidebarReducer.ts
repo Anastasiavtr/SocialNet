@@ -10,7 +10,7 @@ export type FriendsType = {
 let initialState: InitialStateType = {
   friends: [
     { id: 2, name: 'Dima' },
-    { id: 3, name: 'Alexander' },
+    { id: 3, name: 'Alex' },
     { id: 4, name: 'Marina' },
   ],
 }

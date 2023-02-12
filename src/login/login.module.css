@@ -1,13 +1,15 @@
+.wrapper {
+    height: 100vh;
+}
+
 .formContainer {
     display: flex;
     flex-direction: column;
    
-    
 }
 
 .inputContainer {
-
- text-align: left;
+    text-align: left;
 }
 input {
     margin-top: 0.5rem;
@@ -24,5 +26,16 @@ input {
 }
 
 button {
+    cursor: pointer;
     width: 11rem;
+   color:black;
 }
+button:hover {
+    background-color: rgba(111, 183, 238, 0.795);
+}
+
+@media (max-width: 800px) {
+    button {
+        width: 7rem;
+      }
+  }

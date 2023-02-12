@@ -2,11 +2,8 @@ import { Field, Form, Formik } from 'formik'
 import { login } from '../components/State/authReducer'
 import { LoginSchema } from '../Validators/ValidationDialogs'
 import styles from './login.module.css'
-import { connect } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { useScrollTrigger } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../Types/hooks'
-import { getUserProfile } from '../components/State/profileReducer'
 
 export const Login: React.FC<{}> = (props) => {
   const isAuth = useAppSelector((state) => state.auth.isAuth)
@@ -16,14 +13,12 @@ export const Login: React.FC<{}> = (props) => {
   }
 
   return (
-    <section>
+    <section className={styles.wrapper}>
       <h1>Login</h1>
       <LoginForm />
     </section>
   )
 }
-
-// export default Login
 
 const LoginForm: React.FC<{}> = (props) => {
   const captchaUrl = useAppSelector((state) => state.auth.captchaUrl)
@@ -127,7 +122,11 @@ const LoginForm: React.FC<{}> = (props) => {
               <div>
                 <p>{status}</p>
               </div>
-              <button type="submit" disabled={!isValid || isSubmitting}>
+              <button
+                className={styles.loginButton}
+                type="submit"
+                disabled={!isValid || isSubmitting}
+              >
                 Submit
               </button>
             </div>

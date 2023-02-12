@@ -1,0 +1,18 @@
+.messageImg {
+max-width: 40px; 
+}
+.wrapper {
+ max-height: 500px;
+ overflow: auto;
+ margin-bottom: 30px;
+}
+.container{
+    padding: 10px;
+    border-bottom: 1px solid grey;
+ }
+.messageItems{ 
+    display: flex;
+    align-items: center;
+    gap:10px;
+    padding-bottom: 10px;
+ }
