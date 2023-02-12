@@ -33,7 +33,15 @@ button {
 button:hover {
     background-color: rgba(111, 183, 238, 0.795);
 }
-
+@media (min-width: 1200px) {
+    .ormContainer {
+        font-size: 30px;
+    }
+    
+    button {
+        width: 7rem;
+      }
+  }
 @media (max-width: 800px) {
     button {
         width: 7rem;

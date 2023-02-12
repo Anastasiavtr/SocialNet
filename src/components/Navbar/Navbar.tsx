@@ -36,11 +36,6 @@ export const Navbar = React.memo((props: { friends: FriendsType }) => {
                 Chat
               </NavLink>{' '}
             </li>
-            <li>
-              <NavLink to="/music" className={activeLink}>
-                Music
-              </NavLink>{' '}
-            </li>
           </ul>
         </nav>
 

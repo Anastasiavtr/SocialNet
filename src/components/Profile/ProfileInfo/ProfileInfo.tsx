@@ -35,16 +35,17 @@ const ProfileInfo: React.FC<PropsType> = React.memo((props) => {
   return (
     <section className={styles.container}>
       <div className={styles.wrapper}>
-        <img
-          className={styles.userImg}
-          src={props.profile.photos.large || user}
-        />
-        {props.isOwner && (
-          <div className={styles.input}>
-            <input type={'file'} onChange={onMainPhotoSelected} />
-          </div>
-        )}
-
+        <div className={styles.inner}>
+          <img
+            className={styles.userImg}
+            src={props.profile.photos.large || user}
+          />
+          {props.isOwner && (
+            <div className={styles.input}>
+              <input type={'file'} onChange={onMainPhotoSelected} />
+            </div>
+          )}
+        </div>
         {props.isEdit ? (
           <ProfileDataForm
             profile={props.profile}

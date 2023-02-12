@@ -67,7 +67,11 @@ max-height: 300px;
     color:rgba(255, 0, 25, 0.733);
     font-size:1rem;
 }
-
+.inner{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
 @media (max-width: 1200px) {
     .userImg  {
         padding-left: 20px;
@@ -82,7 +86,15 @@ max-height: 300px;
       }
 
       .input input {
+        font-size: 12px;
         padding-left: 0;
       }
   }
 
+  @media (max-width: 400px) {
+   
+      .input input {
+        font-size: 12px;
+        
+      }
+  }

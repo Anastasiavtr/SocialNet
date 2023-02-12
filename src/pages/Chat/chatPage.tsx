@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import { ChatMessageApiType } from '../../api/chatApi'
 
 import {
@@ -10,6 +11,12 @@ import { useAppDispatch, useAppSelector } from '../../Types/hooks'
 import styles from './chatPage.module.css'
 
 const ChatPage: React.FC = () => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth)
+
+  if (!isAuth) {
+    return <Navigate to="/login/" />
+  }
+
   return <Chat />
 }
 export default ChatPage
